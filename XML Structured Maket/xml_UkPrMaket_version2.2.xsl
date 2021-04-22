@@ -166,7 +166,7 @@
                         <xsl:value-of select="replace($font-face, ' ', '')"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="@face"/> 
+                        <xsl:value-of select="$font-face"/> 
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:with-param>        

@@ -8,7 +8,7 @@
     <!-- Ширина большинства таблиц задается здесь в пунктах -->  
     <xsl:param name="table-width">161.575</xsl:param>
     <xsl:param name="pictures-folder">N:/Pictures/Vent/</xsl:param>
-    <xsl:param name="logo-folder">C:/enc2021/</xsl:param>
+    <xsl:param name="logo-folder">C:/enc2022/</xsl:param>
     <xsl:param name="struf-DV-folder">N:/Pictures/FORMULADV/tif/</xsl:param>
     <xsl:param name="source-struf-folder">\\DISKSTATION\NetBackup\12-Общая\BOOK\Struf_DV\</xsl:param> <!-- переменная для сверки пути к папке с структурными формулами в выводе html. В выводимом html приводится полный путь, если он вдруг поменялся - переменную надо обновить-->
     
@@ -570,7 +570,7 @@
                         <xsl:value-of select="replace($font-face, ' ', '')"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="@face"/> 
+                        <xsl:value-of select="$font-face"/> 
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:with-param>        
