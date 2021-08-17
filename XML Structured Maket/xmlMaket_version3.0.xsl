@@ -10,7 +10,7 @@
     <xsl:param name="pictures-folder">N:/Pictures/Vent/</xsl:param>
     <xsl:param name="logo-folder">C:/enc2022/</xsl:param>
     <xsl:param name="struf-DV-folder">N:/Pictures/FORMULADV/tif/</xsl:param>
-    <xsl:param name="source-struf-folder">\\DISKSTATION\NetBackup\12-Общая\BOOK\Struf_DV\</xsl:param> <!-- переменная для сверки пути к папке с структурными формулами в выводе html. В выводимом html приводится полный путь, если он вдруг поменялся - переменную надо обновить-->
+    <xsl:param name="source-struf-folder">\\rls-srv-fs-03\share\12-Общая\BOOK\Struf_DV\</xsl:param> <!-- переменная для сверки пути к папке с структурными формулами в выводе html. В выводимом html приводится полный путь, если он вдруг поменялся - переменную надо обновить-->
     
     <xsl:strip-space elements="*"/> <!-- Инструкция удаляет все пробельные узлы из исходного дерева xhtml -->
 
