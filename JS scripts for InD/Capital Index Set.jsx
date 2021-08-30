@@ -20,7 +20,7 @@ function Main() {
         const INDEX_HorizontalPosition = 190.5;        
         const INDEX_LETTER_WIDTH = 20;
         const INDEX_LETTER_HEIGHT = 7;
-        const PATH_TO_FILES_WITH_INDEX_LETTERS = "C:\\enc2021\\Plashka_color_EPS\\";
+        const PATH_TO_FILES_WITH_INDEX_LETTERS = "C:\\enc2022\\Plashka_color_EPS\\";
         const EXTENSION_OF_FILES_WITH_INDEX_LETTERS = ".eps"; // расширение графических файлов в папке
         var foundHeadingCapilals = [];
         var indexGeometricBounds = [];
