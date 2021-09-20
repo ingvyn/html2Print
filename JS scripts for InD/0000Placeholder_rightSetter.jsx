@@ -29,13 +29,17 @@ function Main() {
         app.findGrepPreferences = NothingEnum.NOTHING;
         app.findChangeGrepOptions.includeMasterPages = false;
         for (var p=0; p < paragraphStyleChangeSettings.paragraphs.length; p++) {
-            app.findGrepPreferences.findWhat = paragraphStyleChangeSettings.whatFind; // задается GREP-запрос из объекта с настройками изменений
-            app.findGrepPreferences.appliedParagraphStyle = paragraphStyleChangeSettings.paragraphs[p];  //задается поиск по искомому стилю абзаца
-            var foundTexts = app.documents[0].findGrep(); // массив из найденных объектов Texts (оъектная модель InDesign)
-            for (var i=0; i<foundTexts.length; i++) {
-                foundTexts[i].paragraphs[0].appliedParagraphStyle = paragraphStyleChangeSettings.paragraphStyleChangeTo[p]; // меняется стиль абзаца, с текстом, удовлетворяющем условиям поиска - Grep-запросу и стилю абзаца с текстом
+            try { //ошибка вылетает, когда в документе не находится стиля из paragraphs - обработка ошибок позволяет перейти к следующему из списка параграфов и обрабатывать все одинаковые ситуации в разных документах
+                app.findGrepPreferences.findWhat = paragraphStyleChangeSettings.whatFind; // задается GREP-запрос из объекта с настройками изменений
+                app.findGrepPreferences.appliedParagraphStyle = paragraphStyleChangeSettings.paragraphs[p];  //задается поиск по искомому стилю абзаца
+                var foundTexts = app.documents[0].findGrep(); // массив из найденных объектов Texts (оъектная модель InDesign)
+                for (var i=0; i<foundTexts.length; i++) {
+                    foundTexts[i].paragraphs[0].appliedParagraphStyle = paragraphStyleChangeSettings.paragraphStyleChangeTo[p]; // меняется стиль абзаца, с текстом, удовлетворяющем условиям поиска - Grep-запросу и стилю абзаца с текстом
+                }
             }
-
+            catch (e) {
+                continue;
+            }
         }
 		alert("Finished!");
 	}
