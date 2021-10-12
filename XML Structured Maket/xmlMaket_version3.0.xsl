@@ -118,30 +118,30 @@
         </xsl:variable>  
         <xsl:variable name="arrColWidth" as="xs:integer*"> <!-- В зависимости от количества столбцов формируются переменные-последовательности, состоящие из величин ширины столбцов -->
             <xsl:choose>
-                <xsl:when test="count(descendant::td)=2">
-                    <xsl:sequence select="(174, 300)"/> <!-- величины ширины столбцов для таблицы, содержащей логотип и название фирмы с адресом -->
+                <xsl:when test="@border=1">
+                    <xsl:sequence select="(120, 121, 111, 113, 39)"/> <!-- величины ширины столбцов для таблицы, содержащей информацию о препаратах в текущем указателе -->
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:sequence select="(120, 121, 111, 113, 39)"/> <!-- величины ширины столбцов для таблицы, содержащей информацию о препаратах в текущем указателе -->
+                    <xsl:sequence select="(174, 300)"/> <!-- величины ширины столбцов для таблицы, содержащей логотип и название фирмы с адресом -->
                 </xsl:otherwise>
             </xsl:choose>                    
         </xsl:variable>
         <xsl:variable name="header-row-count">
             <xsl:call-template name="Table_HeaderRowCount"/> <!-- подсчет числа строк в заголовке таблицы: берется максимальный среди всех ячеек первой строки атрибут rowspan -->          
         </xsl:variable>
-        <xsl:variable name="table-style"> <!-- В зависимости от количества столбцов определяется стиль таблицы: в макете их всего два -->
+        <xsl:variable name="table-style"> 
             <xsl:choose>
-                <xsl:when test="count(descendant::td)=2">
-                    <xsl:value-of select="'TableMono_0Line'"/>
+                <xsl:when test="@border=1">
+                    <xsl:value-of select="'Table_YellowStrip'"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="'Table_YellowStrip'"/>
+                    <xsl:value-of select="'TableMono_0Line'"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="cell-style">
             <xsl:choose>
-                <xsl:when test="count(descendant::td)=2">
+                <xsl:when test="$table-style='TableMono_0Line'">
                     <xsl:value-of select="'CellMono_0Line'"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -260,8 +260,21 @@
         <xsl:choose><!-- для формирования колонтитулов в макете по значениям абзацев со стилями, проверяемыми во сравнении, добавляется дублирующий абзац со стилем COLONT_Opis -->
             <xsl:when test="@class='OPIS_LARGETON' or @class='Opis_DV_Opis'"> <!-- первый when для формирования колонтитулов в 1-й главе раздел 1.5 "Описания..." -->
                 <xsl:text>&#xA;</xsl:text>
+                <xsl:variable name="content-string">
+                    <xsl:value-of select="."/>
+                </xsl:variable>
+                <xsl:variable name="opis-string">
+                    <xsl:choose>
+                        <xsl:when test="starts-with($content-string, 'New ')">
+                            <xsl:value-of select="substring-after($content-string, 'New ')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$content-string"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
                 <COLONT_Opis xmlns:aid="http://ns.adobe.com/AdobeInDesign/4.0/" xmlns:aid5="http://ns.adobe.com/AdobeInDesign/5.0/" aid:pstyle="COLONT_Opis">
-                    <xsl:analyze-string select="." regex="(([А-Яа-я0-9®*+-]+\s*){{1,4}})(.*)"> 
+                    <xsl:analyze-string select="$opis-string" regex="(([А-Яа-я0-9®*+-]+\s*){{1,6}})(.*)"> 
                         <xsl:matching-substring>
                             <xsl:value-of select="regex-group(1)"/> <!-- Выбираем первую группу символов - те, которые стоят до открывающей круглой скобки -->
                         </xsl:matching-substring>
