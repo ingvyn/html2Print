@@ -57,8 +57,21 @@
         <xsl:choose><!-- для формирования колонтитулов в макете по значениям абзацев со стилями, проверяемыми во сравнении, добавляется дублирующий абзац со стилем COLONT_Opis -->
             <xsl:when test="@class='OPIS_LARGETON' or @class='Opis_DV_Opis'"> <!-- первый when для формирования колонтитулов в 1-й главе раздел 1.5 "Описания..." -->
                 <xsl:text>&#xA;</xsl:text>
+                <xsl:variable name="content-string">
+                    <xsl:value-of select="."/>
+                </xsl:variable>
+                <xsl:variable name="opis-string">
+                    <xsl:choose>
+                        <xsl:when test="starts-with($content-string, 'New ')">
+                            <xsl:value-of select="substring-after($content-string, 'New ')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$content-string"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
                 <COLONT_Opis xmlns:aid="http://ns.adobe.com/AdobeInDesign/4.0/" xmlns:aid5="http://ns.adobe.com/AdobeInDesign/5.0/" aid:pstyle="COLONT_Opis">
-                    <xsl:analyze-string select="." regex="(([А-Яа-я0-9®*+-]+\s*){{1,4}})(.*)"> 
+                    <xsl:analyze-string select="$opis-string" regex="(([А-Яа-я0-9®*+-]+\s*){{1,4}})(.*)"> 
                         <xsl:matching-substring>
                             <xsl:value-of select="regex-group(1)"/> <!-- Выбираем первую группу символов - те, которые стоят до открывающей круглой скобки -->
                         </xsl:matching-substring>

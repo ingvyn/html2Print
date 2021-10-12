@@ -16,7 +16,7 @@
     происходит с применением регулярного выражения (только в xslt 2.0)
     -->
     <xsl:strip-space elements="*"/> <!-- Инструкция удаляет все пробельные узлы из исходного дерева xhtml -->
-    <xsl:param name="logo-folder">C:/enc2021/</xsl:param>
+    <xsl:param name="logo-folder">C:/enc2022/</xsl:param>
     
     <xsl:template match="body">
         <xsl:text>&#xA;</xsl:text>
