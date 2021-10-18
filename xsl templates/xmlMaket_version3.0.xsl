@@ -12,8 +12,10 @@
     <xsl:param name="struf-DV-folder">N:/Pictures/FORMULADV/tif/</xsl:param>
     <xsl:param name="source-struf-folder">\\rls-srv-fs-03\share\12-Общая\BOOK\Struf_DV\</xsl:param> <!-- переменная для сверки пути к папке с структурными формулами в выводе html. В выводимом html приводится полный путь, если он вдруг поменялся - переменную надо обновить-->
     
-    <xsl:strip-space elements="*"/> <!-- Инструкция удаляет все пробельные узлы из исходного дерева xhtml -->
-
+    <!--<xsl:strip-space elements="*"/> -->
+    <!--Инструкция удобна тем, что удаляет лишние пробельные узлы, в частности перед и после якорей или ссылок, которые хорошо бы вычистить из вывода ксенона
+        но удаляет пробелы и в таких случаях <p><i>in</i> <i>vitro</i></p> - на выходе получим invitro-->
+    
     
     <xsl:template match="body">
         <xsl:text>&#xA;</xsl:text>
